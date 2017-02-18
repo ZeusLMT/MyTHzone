@@ -6,6 +6,9 @@ public class EnemySight: MonoBehaviour {
 	[SerializeField]
 	private Enemy1 enemy;
 
+	 
+		
+
 	void OnTriggerEnter2D ( Collider2D other){
 		if (other.tag == "Player") {
 			enemy.Target = other.gameObject;

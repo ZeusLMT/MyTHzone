@@ -7,9 +7,12 @@ public class RangeState : IEnemyState {
 	private float throwTimer;
 	private float throwCoolDown =3;
 	private bool canAttack = true;
-
+	//private Collision2D Ho;
 
 	public void Execute (){
+		//Debug.Log ("hihi"+coll.gameObject.tag);
+		Debug.Log (enemy.Target);
+		//if (enemy.Target != null && coll.gameObject.tag !="Edge") {
 		if (enemy.Target != null) {
 			enemy.Move ();
 		} else {

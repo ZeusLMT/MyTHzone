@@ -23,9 +23,11 @@ public class PatrolState : IEnemyState {
 
 	}
 	public void OnTriggerEnter (Collider2D other){
+		
 		if (other.tag == "Edge") {
+			
 			enemy.ChangeDirection ();
-			Debug.Log (enemy.facingRight);
+
 		}
 	}
 	private void Patrol(){
@@ -38,3 +40,4 @@ public class PatrolState : IEnemyState {
 	}
 
 }
+  

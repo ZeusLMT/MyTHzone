@@ -24,10 +24,13 @@ public class Enemy1 : Character
 		LookAtTarget ();
 	}
 	private void LookAtTarget (){
+		
 		if (Target != null) {
 			float xDir = Target.transform.position.x - transform.position.x;
-			Debug.Log ("Hello");
+			Debug.Log ("Hello" + facingRight);
+			Debug.Log (xDir);
 			if (xDir < 0 && facingRight || xDir > 0 && !facingRight) {
+				Debug.Log ("Change direction get called");
 				ChangeDirection ();
 			}
 		} 
@@ -37,6 +40,7 @@ public class Enemy1 : Character
 
 	public void ChangeState (IEnemyState newState)
 	{
+		Debug.Log ("Change state");
 		if (currentState != null) {
 			currentState.Exit ();
 		}
@@ -59,6 +63,8 @@ public class Enemy1 : Character
 
 	}
 	void OnTriggerEnter2D ( Collider2D other){
+		Debug.Log ("other " + other);
 		currentState.OnTriggerEnter (other);
 	}
+
 }
