@@ -10,26 +10,24 @@ public class RangeState : IEnemyState {
 	//private Collision2D Ho;
 
 	public void Execute (){
-		//Debug.Log ("hihi"+coll.gameObject.tag);
-		Debug.Log (enemy.Target);
-		//if (enemy.Target != null && coll.gameObject.tag !="Edge") {
 		if (enemy.Target != null) {
+			enemy.TouchEdge = false;
 			enemy.Move ();
 		} else {
 			enemy.ChangeState (new IdleState ());
 		}
 		enemyAttack ();
-		
 	} 
+
 	public void Enter (Enemy1 enemy){
 		this.enemy = enemy; 
-
 	}
+
 	public void Exit (){
 
 	}
-	public void OnTriggerEnter (Collider2D other){
 
+	public void OnTriggerEnter (Collider2D other){
 	}
 	private void enemyAttack(){
 		throwTimer += Time.deltaTime;

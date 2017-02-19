@@ -7,7 +7,8 @@ public class Enemy1 : Character
 	private IEnemyState currentState;
 	[SerializeField]
 	public GameObject Target { get; set; }
-
+	[SerializeField]
+	public bool TouchEdge;
 
 	// Use this for initialization
 	public override void Start ()
@@ -42,6 +43,7 @@ public class Enemy1 : Character
 	{
 		Debug.Log ("Change state");
 		if (currentState != null) {
+			//Debug.Log ("Really exit here" + currentState);
 			currentState.Exit ();
 		}
 		currentState = newState;
@@ -63,8 +65,9 @@ public class Enemy1 : Character
 
 	}
 	void OnTriggerEnter2D ( Collider2D other){
-		Debug.Log ("other " + other);
+		
 		currentState.OnTriggerEnter (other);
+
 	}
 
 }

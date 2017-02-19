@@ -8,11 +8,13 @@ public class PatrolState : IEnemyState {
 	private float patrolDuration = 5;
 	private Enemy1 enemy;
 
+
+
 	public void Execute (){
 		
 		Patrol ();
 		enemy.Move ();
-		if ( enemy.Target !=null){
+		if ( enemy.Target != null){
 			enemy.ChangeState ( new RangeState());
 		}
 	}

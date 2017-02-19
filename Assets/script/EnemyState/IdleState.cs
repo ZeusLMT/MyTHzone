@@ -24,8 +24,8 @@ public class IdleState : IEnemyState {
 	}
 	public void OnTriggerEnter (Collider2D other){
 		
-		
 	}
+
 	private void Idle(){
 		enemy.MyAnimator.SetFloat ("speed", 0);
 		idleTimer += Time.deltaTime;
