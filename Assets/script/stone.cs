@@ -11,14 +11,19 @@ public class stone : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		myRigidbody = GetComponent<Rigidbody2D> ();
+
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		myRigidbody.velocity = direction * speed;
+		Debug.Log ("speed");
+
 	}
 	void OnBecameInvisible (){
 		Destroy (gameObject);
+		Debug.Log ("visible");
+
 	}
 	public void Initialize (Vector2 direction){
 		this.direction = direction;

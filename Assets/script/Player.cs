@@ -64,7 +64,7 @@ public class Player : Character
 	void FixedUpdate ()
 	{
 		float horizontal = Input.GetAxis ("Horizontal");
-		OnGround = IsGrounded ();
+		OnGround = IsGrounded () && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("JumpUp");
 		HandleMovement (horizontal);
 		Flip (horizontal);
 		//HandleAttacks ();
