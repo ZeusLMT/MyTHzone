@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Explode : MonoBehaviour {
-	
-	public int totalParts;
+	public BodyPart bodyPart;
+	public int totalParts =6;
 
 	// Use this for initialization
 	void Start () {
@@ -23,25 +24,26 @@ public class Explode : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter2D(Collision2D target){
+	/*void OnCollisionEnter2D(Collision2D target){
 		if (target.gameObject.tag == "Deadly") {
 			OnExplode();
 		}
 
-	}
+	}*/
 
 	public void OnExplode(){
 		Destroy (gameObject);
 
-		/*var t = transform;
+		var t = transform;
 
 		for (int i = 0; i < totalParts; i++) {
+			t.TransformPoint (0, -100, 0);
 			BodyPart clone = Instantiate(bodyPart, t.position, Quaternion.identity) as BodyPart;
-			clone.GetComponent<Rigidbody2D>().AddForce(Vector3.right * (Random.Range (-50, 50)));
-			clone.GetComponent<Rigidbody2D>().AddForce(Vector3.up * Random.Range(100, 400));
+			clone.GetComponent <Rigidbody2D>().AddForce(Vector3.right * (Random.Range (-50, 50)));
+			clone.GetComponent <Rigidbody2D>().AddForce(Vector3.up * Random.Range(100, 400));
 		}
 
-		GameObject go = new GameObject ("ClickToContinue");
+		/*GameObject go = new GameObject ("ClickToContinue");
 		ClickToContinue script = go.AddComponent<ClickToContinue> ();
 		script.scene = Application.loadedLevelName;
 		go.AddComponent<DisplayRestartText> ();*/
