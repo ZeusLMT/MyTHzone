@@ -6,7 +6,7 @@ public class PatrolState : IEnemyState {
 
 	private float patrolTimer;
 	private float patrolDuration = 5;
-	private Enemy1 enemy;
+	private EnemyFollowTarget enemy;
 
 
 
@@ -18,7 +18,7 @@ public class PatrolState : IEnemyState {
 			enemy.ChangeState ( new RangeState());
 		}
 	}
-	public void Enter (Enemy1 enemy){
+	public void Enter (EnemyFollowTarget enemy){
 		this.enemy = enemy;
 	}
 	public void Exit (){

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1 : Character
+public class EnemyFollowTarget : Character
 {
 	private IEnemyState currentState;
 	[SerializeField]
@@ -68,6 +68,14 @@ public class Enemy1 : Character
 		
 		currentState.OnTriggerEnter (other);
 
+	}
+	public override IEnumerator TakeDamage(){
+		yield return null;
+	}
+	public override bool IsDead {
+		get{ 
+			return health <= 0;
+		}
 	}
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IEnemyState  {
 
 	void Execute ();
-	void Enter (Enemy1 enemy);
+	void Enter (EnemyFollowTarget enemy);
 	void Exit ();
 	void OnTriggerEnter (Collider2D other);
 }

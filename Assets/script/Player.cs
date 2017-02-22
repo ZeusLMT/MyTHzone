@@ -57,7 +57,9 @@ public class Player : Character
 	void Update ()
 	{
 		HanldeInput ();
-
+	
+			
+			
 	}
 
 
@@ -84,7 +86,7 @@ public class Player : Character
 
 		if (OnGround && Jump) {
 			
-			if (this.MyAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("idle")) {
+			if (!this.MyAnimator.GetCurrentAnimatorStateInfo (1).IsTag ("JumpUp") && this.MyAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("idle")) {
 				MyRigidbody.velocity = (new Vector2 (0, 50 * (jumpForce / MyRigidbody.mass)));
 			} else if (this.MyAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("run")) {
 				MyRigidbody.velocity = (new Vector2 (horizontal * movementSpeed, 50 * (jumpForce / MyRigidbody.mass)));
@@ -201,5 +203,26 @@ public class Player : Character
 		if (!OnGround && value == 1 || OnGround && value == 0) {
 			base.ThrowStone (value);
 		}
+	}
+
+	public override IEnumerator TakeDamage(){
+		health -= 10;// we can change later
+		if (!IsDead) {
+			MyAnimator.SetTrigger ("damage");
+		} else {
+			MyAnimator.SetTrigger ("die");
+			Destroy (gameObject,1);
+			yield return null;
+		}
+	}
+	public override bool IsDead {
+		get{ 
+			return health <= 0;
+		}
+	}
+	public override void OnCollisionEnter2D ( Collision2D other){
+		base.OnCollisionEnter2D (other);
+		Debug.Log ("Collide with bullet");
+
 	}
 }

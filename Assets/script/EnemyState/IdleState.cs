@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IdleState : IEnemyState {
 
-	private Enemy1 enemy;
+	private EnemyFollowTarget enemy;
 	private float idleTimer;
 	private float idleDuration = 2;
 
@@ -15,7 +15,7 @@ public class IdleState : IEnemyState {
 			enemy.ChangeState (new PatrolState ());
 		} 
 	}
-	public void Enter (Enemy1 enemy){
+	public void Enter (EnemyFollowTarget enemy){
 		this.enemy = enemy;
 	
 	}

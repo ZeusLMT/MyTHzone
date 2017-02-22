@@ -16,9 +16,13 @@ public class Projectile : MonoBehaviour {
 	void Start () {
 		
 	}
+	private void Awake () {
+		Physics2D.IgnoreCollision (GetComponent <Collider2D >(), Enemy2.FindObjectOfType<BoxCollider2D>(), true);
+	}
+
 	// function to set the bullet's direction
 	/*public void SetDirection ( Vector2 direction){
-		_direction = direction.normalized;
+		/*_direction = direction.normalized;
 		isReady = true;
 	}*/
 	// Update is called once per frame
@@ -39,6 +43,9 @@ public class Projectile : MonoBehaviour {
 
 
 	void OnCollisionEnter2D ( Collision2D target){
-		Destroy (gameObject);
+		if (target.gameObject.tag == "Player") {
+			Debug.Log ("hit");
+			Destroy (gameObject);
+		}
 	}
 }

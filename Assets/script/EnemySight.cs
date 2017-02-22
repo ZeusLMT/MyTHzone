@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySight: MonoBehaviour {
 	[SerializeField]
-	private Enemy1 enemy;
+	private EnemyFollowTarget enemy;
 
 	 
 		

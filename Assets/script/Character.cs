@@ -2,16 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
 public abstract class Character : MonoBehaviour {
+
+
+
 	[ SerializeField]
 	protected float movementSpeed;
 
+	[SerializeField]
+	protected int health;
+
+	public abstract bool IsDead { get; }
+
 	public bool Attack { get; set; }
+
 	public Animator MyAnimator { get; set; }
+
+	public bool TakingDamage { get; set;}
 
 	[ SerializeField]
 	protected GameObject throwstone;
+
 	public bool facingRight;
+
+	[SerializeField]
+	private EdgeCollider2D KnifeAttackCol;
+
+	[SerializeField]
+	private List<string> damageSources;
 
 
 	public virtual void Start () {
@@ -36,10 +57,22 @@ public abstract class Character : MonoBehaviour {
 
 		if(facingRight) {
 			GameObject tmp = (GameObject)Instantiate (throwstone, transform.position, Quaternion.Euler (new Vector3 (0, 0, -90)));
-			tmp.GetComponent<stone>().Initialize (Vector2.right);
+			tmp.GetComponent<weapon>().Initialize (Vector2.right);
 		} else {
 			GameObject tmp = (GameObject)Instantiate (throwstone, transform.position, Quaternion.Euler (new Vector3 (0, 0, 90)));
-			tmp.GetComponent<stone>().Initialize (Vector2.left);
+			tmp.GetComponent<weapon>().Initialize (Vector2.left);
+		}
+	}
+
+	public abstract IEnumerator TakeDamage ();
+
+	public void MeleeAttack(){
+		KnifeAttackCol.enabled = !KnifeAttackCol.enabled;
+	}
+
+	public virtual void OnCollisionEnter2D (Collision2D other){
+		if (damageSources.Contains(other.gameObject.tag)) {
+			StartCoroutine (TakeDamage ());
 		}
 	}
 }

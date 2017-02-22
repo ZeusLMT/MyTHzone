@@ -6,7 +6,7 @@ public class Attack : IEnemyState {
 	public void Execute (){
 		
 	}
-	public void Enter (Enemy1 enemy){
+	public void Enter (EnemyFollowTarget enemy){
 
 	}
 	public void Exit (){

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RangeState : IEnemyState {
-	private Enemy1 enemy;
+	private EnemyFollowTarget enemy;
 	private float throwTimer;
 	private float throwCoolDown =3;
 	private bool canAttack = true;
@@ -19,7 +19,7 @@ public class RangeState : IEnemyState {
 		enemyAttack ();
 	} 
 
-	public void Enter (Enemy1 enemy){
+	public void Enter (EnemyFollowTarget enemy){
 		this.enemy = enemy; 
 	}
 

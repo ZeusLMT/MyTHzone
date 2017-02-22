@@ -10,7 +10,7 @@ public class Enemy2 : MonoBehaviour
     public GameObject projectile;
     private bool readyToAttack;
     private Animator animator;
-
+	private int health = 30;
     // Use this for initialization
     void Start()
     {
@@ -45,18 +45,31 @@ public class Enemy2 : MonoBehaviour
     }
 
     void OnShoot()
-    {
-        if (projectile != null)
-        {
-            //    var clone = Instantiate(projectile, transform.position, Quaternion.identity);
-            //    Debug.Log("shoot");
-            //}
+	{
+		if (projectile != null) {
+			//    var clone = Instantiate(projectile, transform.position, Quaternion.identity);
+			//    Debug.Log("shoot");
+			//}
 
-
-            var tmp = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            tmp.GetComponent<stone>().Initialize(Vector2.left);
-            Debug.Log("go to left");
-        }
+			var tmp = Instantiate (projectile, transform.position, Quaternion.Euler (new Vector3 (0, 0, 0)));
+			tmp.GetComponent<weapon> ().Initialize (Vector2.left);
+			Debug.Log ("go to left");
+		}
+	}
+	void OnCollisionEnter2D (Collision2D other){
+		if (other.gameObject.tag == "PlayerKnife")
+			health -= 10;
+		if (health > 0) {
+			animator.SetTrigger ("damage");
+		} else {
+			animator.SetTrigger ("die");
+			Destroy (gameObject, 2);
+		}
+	}
+}
+	/*public override IEnumerator TakeDamage(){
+		yield return null;
+	}*/
 
 
 
@@ -93,7 +106,7 @@ public class Enemy2 : MonoBehaviour
                 readyToAttack = true;
                 Debug.Log ("attack");
             }*/
-    }
-}
+    
+
 
 			
