@@ -153,7 +153,7 @@ public class Player : Character
 		}
 		if (Input.GetKeyDown (KeyCode.V)) {
 			MyAnimator.SetTrigger ("throw");
-			base.ThrowStone (0);
+
 		}
 	}
 
