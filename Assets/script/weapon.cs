@@ -19,21 +19,17 @@ public class weapon : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		myRigidbody.velocity = direction * speed;
-		Debug.Log ("speed");
+
 
 	}
 	void OnBecameInvisible (){
 		Destroy (gameObject);
-		Debug.Log ("visible");
+	
 
 	}
 	public void Initialize (Vector2 direction){
 		this.direction = direction;
 	}
 
-	void OnCollisionEnter2D (Collision2D other){
-		if (other.gameObject.name == "Enemy2") {
-			Destroy (gameObject);
-		}
-	}
+
 }

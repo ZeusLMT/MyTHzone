@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Enemy2 : MonoBehaviour
 {
-
+	private Animator animator;
     public AudioClip attackSound;
     public float attackDelay = 3f;
     public GameObject projectile;
     private bool readyToAttack;
-    private Animator animator;
+    
 	private int health = 30;
     // Use this for initialization
     void Start()
@@ -23,7 +23,7 @@ public class Enemy2 : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+  
 
     IEnumerator OnAttack()
     {
@@ -52,21 +52,30 @@ public class Enemy2 : MonoBehaviour
 			//}
 
 			var tmp = Instantiate (projectile, transform.position, Quaternion.Euler (new Vector3 (0, 0, 0)));
-			tmp.GetComponent<weapon> ().Initialize (Vector2.left);
-			Debug.Log ("go to left");
+			tmp.GetComponent<Projectile> ().Initialize (Vector2.left);
+
 		}
 	}
-	void OnCollisionEnter2D (Collision2D other){
-		if (other.gameObject.tag == "PlayerKnife")
+	void OnTriggerEnter2D (Collider2D other){
+		if (other.gameObject.tag == "PlayerKnife" || other.gameObject.tag =="KnifeAttack") {
+			Debug.Log ("Kill Enemy");
 			health -= 10;
-		if (health > 0) {
-			animator.SetTrigger ("damage");
-		} else {
-			animator.SetTrigger ("die");
-			Destroy (gameObject, 2);
+			Destroy (other.gameObject);
+			if (health > 0) {
+				animator.SetTrigger ("damage");
+			} else {
+				animator.SetTrigger ("die");
+				Destroy (gameObject, 2);
+			}
 		}
 	}
+
+
+
+
 }
+
+
 	/*public override IEnumerator TakeDamage(){
 		yield return null;
 	}*/

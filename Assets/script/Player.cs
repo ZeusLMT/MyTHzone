@@ -210,10 +210,12 @@ public class Player : Character
 		if (!IsDead) {
 			MyAnimator.SetTrigger ("damage");
 		} else {
+			MyAnimator.SetLayerWeight (1, 0);
 			MyAnimator.SetTrigger ("die");
 			Destroy (gameObject,1);
-			yield return null;
+
 		}
+		yield return null;
 	}
 	public override bool IsDead {
 		get{ 
@@ -222,7 +224,7 @@ public class Player : Character
 	}
 	public override void OnCollisionEnter2D ( Collision2D other){
 		base.OnCollisionEnter2D (other);
-		Debug.Log ("Collide with bullet");
+
 
 	}
 }

@@ -18,9 +18,10 @@ public class CollisionTrigger : MonoBehaviour {
 	
 
 	void OnTriggerEnter2D (Collider2D other){
-		Debug.Log ("On collision trigger", other);
+		
 		if (other.gameObject.name == "Player") {
 			Physics2D.IgnoreCollision (platformCollider, playerCollider, true);
+
 		}
 	}
 	void OnTriggerExit2D ( Collider2D other){
