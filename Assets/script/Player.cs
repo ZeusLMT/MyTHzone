@@ -46,6 +46,11 @@ public class Player : Character
 	[SerializeField]
 	public bool OnGround { get; set; }
 
+	public bool IsFalling {
+		get {
+			return MyRigidbody.velocity.y < 0;
+		}
+	}
 	public override void Start ()
 	{
 		base.Start ();
@@ -66,7 +71,7 @@ public class Player : Character
 	void FixedUpdate ()
 	{
 		float horizontal = Input.GetAxis ("Horizontal");
-		OnGround = IsGrounded () && !MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("JumpUp");
+		OnGround = IsGrounded () && !MyAnimator.GetCurrentAnimatorStateInfo(1).IsTag("JumpUp");
 		HandleMovement (horizontal);
 		Flip (horizontal);
 		//HandleAttacks ();
@@ -77,68 +82,28 @@ public class Player : Character
 
 	private void HandleMovement (float horizontal)
 	{
-		if (MyRigidbody.velocity.y < 0) {
+		if (IsFalling && gameObject.layer!=9) {
+			gameObject.layer = 10;
 			MyAnimator.SetBool ("land", true);
+
 		}
 		if (!Attack && !Slide && (OnGround || airControl)) {
 			MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);
 		}
 
 		if (OnGround && Jump) {
-			
-			if (!this.MyAnimator.GetCurrentAnimatorStateInfo (1).IsTag ("JumpUp") && this.MyAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("idle")) {
+			Debug.Log (Jump);
+			Debug.Log (OnGround);
+			if (this.MyAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("idle")) {
 				MyRigidbody.velocity = (new Vector2 (0, 50 * (jumpForce / MyRigidbody.mass)));
 			} else if (this.MyAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("run")) {
 				MyRigidbody.velocity = (new Vector2 (horizontal * movementSpeed, 50 * (jumpForce / MyRigidbody.mass)));
 			} 
 		}
 		MyAnimator.SetFloat ("speed", Mathf.Abs (horizontal));
-
-
-
-		/*if (myRidgidbody.velocity.y < 0)
-			myAnimator.SetBool ("land", true);
-		if (!this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack") && (IsGrounded ||airControl)) {
-			myRidgidbody.velocity = new Vector2 (horizontal*movementSpeed, myRidgidbody.velocity.y);	
-			//Debug.Log (IsGrounded);
-		}
-		if (IsGrounded && jump) {
-
-			myAnimator.SetTrigger ("jump");
-
-			if (this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("idle")) {
-				myRidgidbody.velocity = (new Vector2 (0, 50 * (jumpForce / myRidgidbody.mass)));
-			} else if (this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("run") || jumpAttack) {
-				myRidgidbody.velocity = (new Vector2 (horizontal * movementSpeed, 50 * (jumpForce / myRidgidbody.mass)));
-			} 
-		}
-	
-
-		if (slide && !this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Slide")) {
-			myAnimator.SetTrigger ("slide");
-
-		///} else if (!this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag("Slide")) {
-		///	myAnimator.SetBool ("slide", false);
-		}
-		myAnimator.SetFloat ("speed", Mathf.Abs(horizontal));// link run mode with idle mode
-		///Debug.Log (Mathf.Abs (horizontal));*/
 	}
 
-
-
-	/*private void HandleAttacks(){
 		
-		if (attack && IsGrounded && !this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack")) {
-			myAnimator.SetTrigger ("attack");
-			myRidgidbody.velocity = Vector2.zero;
-		}
-		if (jumpAttack && !IsGrounded && !this.myAnimator.GetCurrentAnimatorStateInfo (1).IsName ("Jump_Attack")){
-			myAnimator.SetBool ("jumpAttack", true);
-		}
-		if (!jumpAttack && !this.myAnimator.GetCurrentAnimatorStateInfo (1).IsName ("Jump_Attack")) {
-			myAnimator.SetBool ("jumpAttack", false);
-		}
-	}*/
 
 	private void HanldeInput ()
 	{
@@ -147,8 +112,10 @@ public class Player : Character
 			/*attack = true;
 			jumpAttack = true;*/
 		}
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space) && !IsFalling) {
 			MyAnimator.SetTrigger ("jump");
+
+
 		}
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			MyAnimator.SetTrigger ("attack");
@@ -166,12 +133,7 @@ public class Player : Character
 
 		}
 	}
-	/*private void ResetValue(){
-		attack = false;
-		slide = false;
-		jump = false;
-		jumpAttack = false;
-	} */
+	
 	private bool IsGrounded ()
 	{
 		if (MyRigidbody.velocity.y <= 0) {
@@ -227,4 +189,61 @@ public class Player : Character
 
 
 	}
+
+
+
+
+		/*private void ResetValue(){
+		attack = false;
+		slide = false;
+		jump = false;
+		jumpAttack = false;
+	} */
+
+	/*if (myRidgidbody.velocity.y < 0)
+	myAnimator.SetBool ("land", true);
+	if (!this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack") && (IsGrounded ||airControl)) {
+		myRidgidbody.velocity = new Vector2 (horizontal*movementSpeed, myRidgidbody.velocity.y);	
+		//Debug.Log (IsGrounded);
+	}
+	if (IsGrounded && jump) {
+
+		myAnimator.SetTrigger ("jump");
+
+		if (this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("idle")) {
+			myRidgidbody.velocity = (new Vector2 (0, 50 * (jumpForce / myRidgidbody.mass)));
+		} else if (this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("run") || jumpAttack) {
+			myRidgidbody.velocity = (new Vector2 (horizontal * movementSpeed, 50 * (jumpForce / myRidgidbody.mass)));
+		} 
+	}
+
+
+	if (slide && !this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Slide")) {
+		myAnimator.SetTrigger ("slide");
+
+		///} else if (!this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag("Slide")) {
+		///	myAnimator.SetBool ("slide", false);
+	}
+	myAnimator.SetFloat ("speed", Mathf.Abs(horizontal));// link run mode with idle mode
+	///Debug.Log (Mathf.Abs (horizontal));*/
+
+
+
+
+	/*private void HandleAttacks(){
+
+	if (attack && IsGrounded && !this.myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack")) {
+		myAnimator.SetTrigger ("attack");
+		myRidgidbody.velocity = Vector2.zero;
+	}
+	if (jumpAttack && !IsGrounded && !this.myAnimator.GetCurrentAnimatorStateInfo (1).IsName ("Jump_Attack")){
+		myAnimator.SetBool ("jumpAttack", true);
+	}
+	if (!jumpAttack && !this.myAnimator.GetCurrentAnimatorStateInfo (1).IsName ("Jump_Attack")) {
+		myAnimator.SetBool ("jumpAttack", false);
+	}
+}*/
+
+	
+
 }

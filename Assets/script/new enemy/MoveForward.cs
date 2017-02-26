@@ -8,10 +8,12 @@ public class MoveForward : MonoBehaviour {
 	private Rigidbody2D body2D;
 	protected int health =30;
 	private Animator animator;
+	private Explode explode;
 	// Use this for initialization
 	void Start () {
 		body2D = GetComponent < Rigidbody2D> ();
 		animator = GetComponent<Animator>();
+		explode= GameObject.Find ("Player").GetComponent< Explode >();
 	}
 	
 	// Update is called once per frame
@@ -19,7 +21,7 @@ public class MoveForward : MonoBehaviour {
 		body2D.velocity = new Vector2 (transform.localScale.x, 0) * speed;
 	}
 	 void OnCollisionEnter2D ( Collision2D other){
-		if (other.gameObject.tag == "PlayerKnife" || other.gameObject.tag =="KnifeAttack") {
+		if (other.gameObject.tag == "PlayerKnife" || other.gameObject.tag == "KnifeAttack") {
 			Debug.Log ("Kill Enemy1");
 			health -= 10;
 			Destroy (other.gameObject);
@@ -29,6 +31,11 @@ public class MoveForward : MonoBehaviour {
 				animator.SetTrigger ("die");
 				Destroy (gameObject, 2);
 			}
+		} else if (other.gameObject.tag == "Player") {
+			Debug.Log ("chetne");
+			explode.OnExplode ();
+
+
 		}
 	}
 }
