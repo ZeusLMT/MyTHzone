@@ -74,7 +74,7 @@ public class EnemyFollowTarget : Character
 	}
 	public override bool IsDead {
 		get{ 
-			return health <= 0;
+			return Health <= 0;
 		}
 	}
 

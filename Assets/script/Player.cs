@@ -31,8 +31,8 @@ public class Player : Character
 	private float jumpForce = 200;
 	[SerializeField]
 	private bool airControl;
-	[SerializeField]
 	public float forwardSpeed = 20;
+    public int Score;
 	//private bool jumpAttack;
 
 	//private InputState inputState;
@@ -168,7 +168,7 @@ public class Player : Character
 	}
 
 	public override IEnumerator TakeDamage(){
-		health -= 10;// we can change later
+		Health -= 10;// we can change later
 		if (!IsDead) {
 			MyAnimator.SetTrigger ("damage");
 		} else {
@@ -181,7 +181,7 @@ public class Player : Character
 	}
 	public override bool IsDead {
 		get{ 
-			return health <= 0;
+			return Health <= 0;
 		}
 	}
 	public override void OnCollisionEnter2D ( Collision2D other){
