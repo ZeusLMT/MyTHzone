@@ -9,7 +9,7 @@ public class MoveForward : MonoBehaviour {
 	protected int health =30;
 	private Animator animator;
 	private Explode explode;
-    private bool facingRight = false;
+    //private bool facingRight = false;
 	// Use this for initialization
 	void Start () {
 		body2D = GetComponent < Rigidbody2D> ();

@@ -38,7 +38,8 @@ public class Player : Character
 	//private InputState inputState;
 	public Rigidbody2D MyRigidbody { get; set; }
 
-
+	public bool Falling;
+	public float YSpeed;
 
 	public bool Jump { get; set; }
 
@@ -48,7 +49,9 @@ public class Player : Character
 
 	public bool IsFalling {
 		get {
-			return MyRigidbody.velocity.y < 0;
+			this.YSpeed = MyRigidbody.velocity.y;
+			this.Falling = !(YSpeed < 0.0001 && YSpeed > -0.0001);
+				return Falling;
 		}
 	}
 	public override void Start ()
