@@ -19,7 +19,10 @@ public class MoveForward : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		body2D.velocity = new Vector2 (transform.localScale.x, 0) * speed;
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsTag("Walking"))
+        {
+            body2D.velocity = new Vector2(transform.localScale.x, 0) * speed;
+        }
 	}
     void OnCollisionEnter2D(Collision2D other)
     {
