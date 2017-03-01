@@ -9,7 +9,7 @@ public class ObjectVanish : MonoBehaviour {
     private float Timer = 0f;
 	// Use this for initialization
 	void Start () {
-        delayTime = Random.Range(7, 10);
+        delayTime = Random.Range(23, 28);
         Timer = 0f;
 	}
 
