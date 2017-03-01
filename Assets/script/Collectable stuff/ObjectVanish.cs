@@ -5,11 +5,12 @@ using UnityEngine;
 public class ObjectVanish : MonoBehaviour {
     public GameObject Object;
     private float delayTime;
-    [SerializeField]
     private float Timer = 0f;
-	// Use this for initialization
-	void Start () {
-        delayTime = Random.Range(23, 28);
+    public float delayMax;
+    public float delayMin;
+    // Use this for initialization
+    void Start () {
+        delayTime = Random.Range(delayMin, delayMax);
         Timer = 0f;
 	}
 

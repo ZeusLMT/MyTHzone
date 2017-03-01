@@ -4,14 +4,16 @@ using System.Collections;
 public class Spawner : MonoBehaviour {
 
 	public GameObject[] prefabs;
-	public float delay = 2.0f;
-	public bool active = true;
+	private float delay = 2.0f;
+    public float delayMax;
+    public float delayMin;
+    public bool active = true;
 
 
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (ObjectsGenerator ());
-        delay = Random.Range(30, 35);
+        delay = Random.Range(delayMin, delayMax);
 
 	}
 
@@ -25,8 +27,8 @@ public class Spawner : MonoBehaviour {
 			Instantiate(prefabs[Random.Range(0, prefabs.Length)], newTransform.position, Quaternion.identity);
 
 		}
-
-		StartCoroutine (ObjectsGenerator ());
+        delay = Random.Range(delayMin, delayMax);
+        StartCoroutine (ObjectsGenerator ());
 
 	}
 
