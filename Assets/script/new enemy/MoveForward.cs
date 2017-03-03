@@ -24,12 +24,11 @@ public class MoveForward : MonoBehaviour {
             body2D.velocity = new Vector2(transform.localScale.x, 0) * speed;
         }
 	}
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-		Debug.Log ("collision");
         if (other.gameObject.tag == "PlayerKnife" || other.gameObject.tag == "KnifeAttack")
         {
-            Debug.Log("Kill Enemy1");
+            Debug.Log("Kill Enemy");
             health -= 10;
             Destroy(other.gameObject);
             if (health > 0)
