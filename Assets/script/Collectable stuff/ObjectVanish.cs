@@ -13,7 +13,6 @@ public class ObjectVanish : MonoBehaviour {
         delayTime = Random.Range(delayMin, delayMax);
         Timer = 0f;
 	}
-
     void Update()
     {
         if (Object == null) return;

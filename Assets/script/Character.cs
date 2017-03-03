@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public abstract class Character : MonoBehaviour
 {
-    
     [SerializeField]
     protected float movementSpeed;
-
     [SerializeField]
     public float Health;
 
@@ -24,12 +19,9 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField]
     protected GameObject throwstone;
-
     public bool facingRight;
-
     [SerializeField]
     private EdgeCollider2D KnifeAttackCol;
-
     [SerializeField]
     private List<string> damageSources;
 
@@ -43,7 +35,6 @@ public abstract class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
     public void ChangeDirection()
     {
