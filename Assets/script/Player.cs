@@ -16,9 +16,7 @@ public class Player : Character
 			return instance;
 		}
 	}
-
-
-
+    
 	[SerializeField]
 	private Transform[] groundPoints;
 	[SerializeField]
@@ -58,16 +56,11 @@ public class Player : Character
 	{
 		base.Start ();
 		MyRigidbody = GetComponent<Rigidbody2D> ();
-
 	}
-	
-	// Update is called once per frame
+
 	void Update ()
 	{
 		HanldeInput ();
-	
-			
-			
 	}
 
 
@@ -88,9 +81,9 @@ public class Player : Character
 		if (IsFalling && gameObject.layer!=9) {
 			gameObject.layer = 10;
 			MyAnimator.SetBool ("land", true);
-
 		}
-		if (!Attack && !Slide && (OnGround || airControl)) {
+        //run
+		if (!Attack && !Slide) {
 			MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);
 		}
 
@@ -105,9 +98,7 @@ public class Player : Character
 		}
 		MyAnimator.SetFloat ("speed", Mathf.Abs (horizontal));
 	}
-
-		
-
+    
 	private void HanldeInput ()
 	{
 		if (Input.GetKeyDown (KeyCode.LeftControl)) {
@@ -133,7 +124,6 @@ public class Player : Character
 	{
 		if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight) {
 			ChangeDirection ();
-
 		}
 	}
 	
@@ -153,8 +143,6 @@ public class Player : Character
 			}
 		}
 		return false;
-
-
 	}
 
 	private void HandleLayers ()
@@ -169,7 +157,6 @@ public class Player : Character
 			base.ThrowStone (value);
 		}
 	}
-
 	public override IEnumerator TakeDamage(){
 		Health -= 10;// we can change later
 		if (!IsDead) {

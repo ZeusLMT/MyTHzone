@@ -10,13 +10,13 @@ public class Spawner : MonoBehaviour {
     public bool active = true;
 
 
-	// Use this for initialization
-	void Start () {
-		StartCoroutine (ObjectsGenerator ());
+    // Use this for initialization
+    void Start()
+    {
+        StartCoroutine(ObjectsGenerator());
         delay = Random.Range(delayMin, delayMax);
 
-	}
-
+    }
 	IEnumerator ObjectsGenerator(){
 
 		yield return new WaitForSeconds (delay);
