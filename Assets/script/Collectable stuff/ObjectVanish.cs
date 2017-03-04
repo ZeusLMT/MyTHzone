@@ -12,6 +12,7 @@ public class ObjectVanish : MonoBehaviour {
     void Start () {
         delayTime = Random.Range(delayMin, delayMax);
         Timer = 0f;
+		Debug.Log ("cai dau tien daylaytime la "+ delayTime);
 	}
     void Update()
     {
@@ -22,6 +23,7 @@ public class ObjectVanish : MonoBehaviour {
             if (Timer >= delayTime)
             {
                 DestroyObject(Object);
+
             }
         }
     }

@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour {
     {
         StartCoroutine(ObjectsGenerator());
         delay = Random.Range(delayMin, delayMax);
+		Debug.Log ("Spawner" + delay);
 
     }
 	IEnumerator ObjectsGenerator(){

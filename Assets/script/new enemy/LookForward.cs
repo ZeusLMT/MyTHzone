@@ -19,8 +19,8 @@ public class LookForward : MonoBehaviour
 		Debug.DrawLine (sightStart.position, sightEnd.position, Color.green);
 
 		if(collision == needsCollision)
-			this.transform.localScale = new Vector3((transform.localScale.x == 0.4f) ? -0.4f: 0.4f, 0.4f, 1);
-		//this.transform.localScale = new Vector3((transform.localScale.x >0) ? -1* (transform.localScale.x ): transform.localScale.x, transform.localScale.y, 1);
+			//this.transform.localScale = new Vector3((transform.localScale.x == 0.4f) ? -0.4f: 0.4f, 0.4f, 1);
+			this.transform.localScale = new Vector3(- (transform.localScale.x), transform.localScale.y, 1);
 	}
 }
 
