@@ -31,8 +31,9 @@ public class PlatformMoving : MonoBehaviour {
 	private void ChangeDestination(){
 		nextPos = nextPos != posA ? posA : posB;
 	}
-	private void OnCollisionEnter2D (Collision2D other){
-		if (other.gameObject.tag == "Player") {
+	private void OnCollisionEnter2D(Collision2D other)
+    {
+		if (other.gameObject.tag == "Cactus") {
 			other.gameObject.layer = 9;
 			other.transform.SetParent (childTransform);
 			Debug.Log (childTransform);

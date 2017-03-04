@@ -106,7 +106,7 @@ public class Player : Character
 			/*attack = true;
 			jumpAttack = true;*/
 		}
-		if (Input.GetKeyDown (KeyCode.Space) && !IsFalling) {
+		if (Input.GetKeyDown (KeyCode.UpArrow) && !IsFalling) {
 			MyAnimator.SetTrigger ("jump");
 
 
@@ -176,9 +176,9 @@ public class Player : Character
 	}
 	public override void OnCollisionEnter2D ( Collision2D other){
 		base.OnCollisionEnter2D (other);
-
-
+        
 	}
+
 
 
 
