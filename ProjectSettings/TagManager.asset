@@ -10,6 +10,7 @@ TagManager:
   - Enemy2Bullet
   - KnifeAttack
   - Cactus
+  - Enemy
   layers:
   - Default
   - TransparentFX

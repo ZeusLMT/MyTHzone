@@ -34,11 +34,17 @@ public class Projectile : MonoBehaviour {
 	}
 
 
-	void OnCollisionEnter2D ( Collision2D target){
-		
-			Destroy (gameObject);
-		}
+	void OnCollisionEnter2D (Collision2D target)
+    {
+        if (target.gameObject.tag == "PlayerKnife")
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), target.collider, false);
+        } else
+        {
+            Destroy(gameObject);
+        }
 	}
+}
 
 //float speed;
 	/*Vector2 _direction;

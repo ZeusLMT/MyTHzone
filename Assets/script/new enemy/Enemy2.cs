@@ -6,7 +6,7 @@ public class Enemy2 : MonoBehaviour
 {
 	private Animator animator;
     public AudioClip attackSound;
-    public float attackDelay = 3f;
+    public float attackDelay = 5f;
     public GameObject projectile;
     private bool readyToAttack;
     
