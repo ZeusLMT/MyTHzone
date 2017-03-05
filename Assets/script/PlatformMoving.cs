@@ -33,7 +33,7 @@ public class PlatformMoving : MonoBehaviour {
 	}
 	private void OnCollisionEnter2D(Collision2D other)
     {
-		if (other.gameObject.tag == "Cactus") {
+		if (other.gameObject.tag == "Player") {
 			other.gameObject.layer = 9;
 			other.transform.SetParent (childTransform);
 			Debug.Log (childTransform);
